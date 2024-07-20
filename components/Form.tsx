@@ -1,7 +1,6 @@
 'use client'
 import ShinyButton from "@/components/magicui/shiny-button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
 
 export default function Form({ handleSubmit, setForm, form }: any) {
 
