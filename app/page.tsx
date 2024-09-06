@@ -75,6 +75,12 @@ export default function Home() {
 										method: 'POST',
 										body: JSON.stringify({
 											prompt: `activityCompany: ${form.type} company_name: ${form.company_name} descritpion: ${form.desc} creation_year: ${form.creation_year} address: ${form.address}`,
+											type: form.type,
+											template: form.template,
+											company_name: form.company_name,
+											desc: form.desc,
+											creation_year: form.creation_year,
+											address: form.address,
 										}),
 									});
 									console.log(response.ok ? 'ok' : 'KO');

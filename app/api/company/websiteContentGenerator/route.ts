@@ -2,10 +2,11 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-
+import { PrismaClient } from '@prisma/client'
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const { prompt } = await req.json();
+  const { prompt, type, template, company_name, desc, creation_year, address } = await req.json();
+  const prisma = new PrismaClient()
 
   const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
@@ -15,6 +16,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   try {
     console.log('Start request: ', prompt)
+    await prisma.company.create({
+      data: {
+        type: type,
+        template: template,
+        company_name: company_name,
+        desc: desc,
+        creation_year: creation_year,
+        address: address,
+      }
+    })
     return NextResponse.json({ content: 'ok' }, { status: 200 })
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
